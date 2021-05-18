@@ -31,7 +31,7 @@
             $pokeResult = json_decode($pokeJson, true);
 
             // name
-            $pokeName = $pokeResult['name'] || $pokeNameUpper;
+            $pokeName = $pokeResult['name'] ;
             echo "<h2>". ucfirst($pokeName) ."</h2>";
 
             //id
