@@ -13,29 +13,34 @@
     <title>Pokedex</title>
 </head>
 <body>
-<img src="pokemon-seeklogo.png" class="img-fluid text-center">
-<div class="p-5">
+<img src="pokemon-seeklogo.png" class="img-fluid text-center" style="width:50%;">
+<div class="px-5 pb-5">
 <form action="" method="GET">
-    <input type="text" name="name" placeholder="Name or ID here..."/>
+    <input type="text" name="name" placeholder="Name or ID here..." />
     <button type="submit" class="btn btn-dark">SUBMIT</button>
-    <div class="main-body mx-auto p-lg-5 p-sm-3 my-5">   
+    <div class="content-fluid main-body mx-auto p-lg-5 p-sm-3 my-5">   
         <div class="main p-4 m-4 mx-auto">   
         <?php
         if(!empty($_GET['name'])){
-            $pokeApiUrl = "https://pokeapi.co/api/v2/pokemon/" . urlencode($_GET['name']);
+
+            //uppercase ok
+            $pokeNameLower = strtolower($_GET['name']);
+
+            $pokeApiUrl = "https://pokeapi.co/api/v2/pokemon/" . urlencode($pokeNameLower);
             $pokeJson = file_get_contents($pokeApiUrl);
             $pokeResult = json_decode($pokeJson, true);
+
             // name
-            $pokeName = $pokeResult['name'];
-            echo "<h2>$pokeName</h2>";
+            $pokeName = $pokeResult['name'] || $pokeNameUpper;
+            echo "<h2>". ucfirst($pokeName) ."</h2>";
 
             //id
             $pokeId = $pokeResult['id'];
-            echo "<h3>" ."#". $pokeId. "</h3>";
+            echo "<h3>" ."#".$pokeId. "</h3>";
 
             // picture
             $pokeImage = "https://pokeres.bastionbot.org/images/pokemon/" .$pokeId .".png";
-            // $pokeImage = $pokeResult ['sprites']['front_default'];
+            // $pokeImage = $pokeResult ['sprites']['front_default'];  <=original image
             echo "<img src= '$pokeImage' />";
 
             //moves
@@ -51,13 +56,16 @@
             $pokeEvName = $pokeEvResult['evolves_from_species'];
 
             if($pokeEvName == null){
-            echo "<h4>"."No previous evolution"."</h4>";
+            echo "<h5>"."No previous evolution"."</h5>";
             }
             else{  
-            echo "<h5>"."Previous evolution is ".$pokeEvName['name']."</h5>"; 
+            echo "<h5>"."Previous evolution is ".ucfirst($pokeEvName['name'])."</h5>"; 
             }  
-
-        }  
+        }
+         //default screen 
+        else{
+            echo "<img src= 'pokeball.png' />";
+        } 
         ?>
         </div>
     </div> 
