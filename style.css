@@ -1,0 +1,39 @@
+body{
+    text-align: center;
+    background-image: url("poke_image.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 1em;
+
+}
+
+.main-body{
+    background-color: rgb(122, 18, 4);
+    border-radius: 10px;
+    font-family: 'Press Start 2P', cursive;
+    width: 50vw;
+}
+.main{
+    background-color: rgb(182, 206, 176);
+    border-radius: 10px;
+    border: 2em solid rgb(224, 223, 223);
+}
+
+@media only screen and (max-width: 600px) {
+    .main{
+        border: 1em solid rgb(224, 223, 223);
+    }
+    .main-body{
+        width: 100%;
+    }
+  }
+
+img{
+    width:60%;
+    height: auto;
+    padding:20px;
+}
+
+h2,h5{
+    padding:20px;
+}
