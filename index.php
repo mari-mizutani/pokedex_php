@@ -13,6 +13,7 @@
     <title>Pokedex</title>
 </head>
 <body>
+<img src="pokemon-seeklogo.png" class="img-fluid text-center">
 <div class="p-5">
 <form action="" method="GET">
     <input type="text" name="name" placeholder="Name or ID here..."/>
