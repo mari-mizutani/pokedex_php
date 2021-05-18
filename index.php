@@ -38,11 +38,14 @@
     $pokeEvolution = "https://pokeapi.co/api/v2/pokemon-species/" . $pokeId;
     $pokeEvJson = file_get_contents($pokeEvolution);
     $pokeEvResult = json_decode($pokeEvJson, true);
-    // evolution name
-    $pokeEvName = $pokeEvResult['evolves_from_species']['name'];
-    echo "<h4>" ."Previous evolution is ".$pokeEvName ."</h4>"; 
+    $pokeEvName = $pokeEvResult['evolves_from_species'];
 
-    
+    if($pokeEvName == null){
+    echo "<h4>"."No previous evolution"."</h4>";
+    }
+    else{  
+    echo "<h4>"."Previous evolution is ".$pokeEvName['name']."</h4>"; 
+    }  
 
 }  
 
