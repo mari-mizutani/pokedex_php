@@ -16,19 +16,24 @@
     $pokeApiUrl = "https://pokeapi.co/api/v2/pokemon/" . urlencode($_GET['name']);
     $pokeJson = file_get_contents($pokeApiUrl);
     $pokeResult = json_decode($pokeJson, true);
+    // name
     $pokeName = $pokeResult['name'];
-    echo "$pokeName";
+    echo "<h1>$pokeName</h1>";
+
+    // picture
     $pokeImage = $pokeResult ['sprites']['front_default'];
     echo "<img src= '$pokeImage' />";
-    }  
 
-    if(!empty($pokeArray)){
-        foreach($pokeArray['name'] as $pokeName){
-            echo $pokeName;
-        }
+    //moves
+    $pokeMove = $pokeResult ['moves'];
+    for($i=0; $i<5; $i++){
+    echo $pokeMove[$i]['move']['name'];
     }
+  
+}  
 
-    ?>
+
+ ?>
 </form>    
 </body>
 </html>
