@@ -1,13 +1,3 @@
-<?php
-if(!empty($_GET["name"])){
-    $pokeApiUrl = "https://pokeapi.co/api/v2/pokemon/".urlencode($_GET["name"]);
-    $pokeJson = file_get_contents($pokeApiUrl);
-    $pokeArray = json_decode($pokeJson,true);
-
-    $name = $pokeArray["results"][0]["name"];
-}  
-?>   
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,18 +7,28 @@ if(!empty($_GET["name"])){
     <title>Pokedex</title>
 </head>
 <body>
-<form action="" method="POST">
-    <input type="text" name="name" placeholder="Pokemon name here...">
+<form action="" method="GET">
+    <input type="text" name="name" placeholder="Pokemon name here..."/>
     <button type="submit">SUBMIT</button>
     <br>
-    <?php
+ <?php
+   if(!empty($_GET['name'])){
+    $pokeApiUrl = "https://pokeapi.co/api/v2/pokemon/" . urlencode($_GET['name']);
+    $pokeJson = file_get_contents($pokeApiUrl);
+    $pokeResult = json_decode($pokeJson, true);
+    $pokeName = $pokeResult['name'];
+    echo "$pokeName";
+    $pokeImage = $pokeResult ['sprites']['front_default'];
+    echo "<img src= '$pokeImage' />";
+    }  
+
     if(!empty($pokeArray)){
-        foreach($pokeArray["name"] as $pokeName){
+        foreach($pokeArray['name'] as $pokeName){
             echo $pokeName;
         }
     }
 
-    ?>  
+    ?>
 </form>    
 </body>
 </html>
